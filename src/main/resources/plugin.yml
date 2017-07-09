@@ -1,0 +1,6 @@
+name: PrisonCells
+version: 1.0.0
+description: A remake of the inactive, PrisonCells plugin.
+website: https://www.piggypiglet.me
+author: PiggyPiglet
+main: me.piggypiglet.prisoncells.Main
