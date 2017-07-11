@@ -1,5 +1,6 @@
 package me.piggypiglet.prisoncells.handlers;
 
+import me.piggypiglet.prisoncells.Config;
 import me.piggypiglet.prisoncells.Main;
 import me.piggypiglet.prisoncells.enums.Messages;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -14,24 +15,14 @@ import java.io.File;
 // ------------------------------
 public class ConfigHandler {
     private Main plugin;
+    private Config config;
+
     public ConfigHandler() {
         plugin = Main.getInstance();
+        config = new Config(plugin.getDataFolder().getPath(), "lang.yml");
     }
     String getMessages(String before, Messages m) {
-        FileConfiguration cfg = getConfig(plugin, plugin.getDataFolder().getPath(), "lang.yml");
+        FileConfiguration cfg = config.getConfig();
         return cfg.getString(before + m.toString());
-    }
-    public FileConfiguration getConfig(JavaPlugin main, String path, String fileName) {
-        File file = new File(path, fileName);
-        if (!file.exists()) {
-            main.getLogger().info(fileName + " isn't a config!");
-        }
-        FileConfiguration fileConfig = new YamlConfiguration();
-        try {
-            fileConfig.load(file);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return fileConfig;
     }
 }

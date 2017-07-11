@@ -1,6 +1,5 @@
 package me.piggypiglet.prisoncells;
 
-import me.piggypiglet.prisoncells.handlers.ConfigHandler;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -11,24 +10,26 @@ import java.io.File;
 // https://www.piggypiglet.me
 // ------------------------------
 public class Main extends JavaPlugin {
-    private ConfigHandler config;
 
     private static Main instance;
     public static Main getInstance() {
         return instance;
     }
 
-    public Main() {
-        config = new ConfigHandler();
+    private Config cfg() {
+        return new Config(getDataFolder().getPath(), "config.yml");
+    }
+    private Config lang() {
+        return new Config(getDataFolder().getPath(), "lang.yml");
     }
     @Override
     public void onEnable() {
         instance = this;
 
-        new Config(this, getDataFolder().getPath(), "config.yml");
-        new Config(this, getDataFolder().getPath(), "lang.yml");
+        cfg();
+        lang();
 
-        final FileConfiguration cfg = config.getConfig(this, getDataFolder().getPath(), "config.yml");
+        final FileConfiguration cfg = cfg().getConfig();
         cfg.addDefault("banana", 1);
         cfg.options().copyDefaults(true);
         try {

@@ -9,8 +9,9 @@ import org.bukkit.command.CommandSender;
 // https://www.piggypiglet.me
 // ------------------------------
 public class Help implements CommandExecutor {
+    private String sub;
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-
+        if ()
         return true;
     }
 }
